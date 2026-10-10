@@ -214,7 +214,7 @@ textarea.out{width:100%;min-height:130px;background:var(--surface2);border:1px s
 </head>
 <body>
 <div class="wrap">
-  <header class="top"><h1>حسبة القعدة</h1><span class="date" id="date"></span></header>
+  <header class="top"><h1>الحساب يوم الحساب 🎮</h1><span class="date" id="date"></span></header>
   <main id="view"></main>
 </div>
 
