@@ -260,17 +260,17 @@ function fmtDur(m){
 function computeTime(st,nowM){
   var t=st.time;
   var base=toMin(t.start);
-  if(base==null) return {err:'اكتب بداية الجلسة في تاب الوقت.',go:'time'};
+  if(base==null) return {err:'اكتب بداية التايم في تاب الوقت.',go:'time'};
   var off=function(m){return ((m-base)%1440+1440)%1440};
   var endOff=t.end? off(toMin(t.end)) : off(nowM);
-  if(endOff<=0) return {err:'نهاية الجلسة لازم تيجي بعد البداية.',go:'time'};
+  if(endOff<=0) return {err:'نهاية التايم لازم تيجي بعد البداية.',go:'time'};
   var people=st.friends.filter(function(f){return f.present});
   if(!people.length) return {err:'اختار الأصحاب الحاضرين في تاب الوقت.',go:'time'};
   var iv=people.map(function(f){
     var a=f.in? off(toMin(f.in)) : 0;
     var b=f.out? off(toMin(f.out)) : endOff;
     var warn='';
-    if(b>endOff){b=endOff;warn='خروجه بعد نهاية الجلسة'}
+    if(b>endOff){b=endOff;warn='خروجه بعد نهاية التايم'}
     if(a>=b){return {f:f,a:0,b:0,warn:'وقت دخوله وخروجه مش مظبوط'}}
     return {f:f,a:a,b:b,warn:warn};
   });
@@ -407,7 +407,7 @@ function viewFriends(){
     }).join('')+'</ul>':
     '<p class="empty">مفيش أصحاب لسه. ضيف أول اسم من فوق.</p>';
   return head('sec-friends','tri','الأصحاب')+
-    '<p class="lead">كل اللي ممكن يجي القعدة. القايمة بتفضل محفوظة حتى لو صفّرت الحساب.</p>'+
+    '<p class="lead">كل اللي ممكن يجي القعدة. </p>'+
     '<div class="stack">'+note+
     '<div class="card"><div class="add"><input type="text" id="newName" placeholder="اسم صاحبك" autocomplete="off" aria-label="اسم صاحبك">'+
     '<button class="btn primary" data-act="addFriend">إضافة</button></div></div>'+
@@ -426,7 +426,7 @@ function tfield(label,scope,f,val,id,withNow,hintId){
 
 function viewTime(){
   var t=state.time;
-  var sess='<div class="card"><h3>الجلسة</h3><div class="fields">'+
+  var sess='<div class="card"><h3>التايم ⏱️</h3><div class="fields">'+
     tfield('بداية','sess','start',t.start,null,true,'t-start')+
     tfield('نهاية','sess','end',t.end,null,true,'t-end')+
     '</div><p class="hint">سيب النهاية فاضية لو لسه قاعدين، وهتتحسب لحد دلوقتي.</p>'+
